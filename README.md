@@ -1,8 +1,21 @@
-# iq96_server
+# graphQL-ORM-DB-typescript-node-server
 
-Server for iq96-client
+Server exposing database table values through a graphQL interface.
+It contrains two database tables, **user** and **role** with an **many-to-many** relation between them.
 
-#### needed config files
+
+Client for this server  - [graphQL-javascript-react-client](https://github.com/Joghur/graphQL-javascript-react-client)
+
+Technology used:
+ * **graphQL**: apollo server
+ * **Database**: postgreSQL and MySQL
+ * **Environment**: node.js
+ * **Language**: Typescript
+ * **ORM**: TypeORM
+
+---
+
+## Installation
 
   **index.ts:** if you use two different types of databases on different servers, change logic in this line in main function:
 
@@ -25,27 +38,16 @@ Server for iq96-client
 	]);
 	export default devPages;
 
-**serviceAccountKey.json:** from firebase account
-
-	{
-	"type": "service_account",
-	"project_id": "<project_id>",
-	"private_key_id": "<private_key_id>",
-	"private_key": "-----BEGIN PRIVATE KEY-----<key>-----END PRIVATE KEY-----\n",
-	"client_email": "<client_email>",
-	"client_id": "<client_id>",
-	"auth_uri": "https://accounts.google.com/o/oauth2/auth",
-	"token_uri": "https://oauth2.googleapis.com/token",
-  	"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-	"client_x509_cert_url": "<client_x509_cert_url>"
-	}
+---
 
 ## Start server
 Either:
 
- - **yarn watch** and **yarn dev**
+ - Dev -> **yarn watch** and **yarn dev**
+
   or
- - **yarn build** and then **yarn start**
+
+ - Production -> **yarn build** and then **yarn start**
 
 TODO:
  - createUser doesn't include Roles when creating new user.
