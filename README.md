@@ -1,7 +1,7 @@
-# graphQL-ORM-DB-typescript-node-server
+# graphQL-ORM-postgreSQL/MySQL-typescript-node-server
 
 Server exposing database table values through a graphQL interface.
-It contrains two database tables, **user** and **role** with an **many-to-many** relation between them.
+It contains two database tables, **user** and **role** with an **many-to-many** relation between them.
 
 
 Client for this server  - [graphQL-javascript-react-client](https://github.com/Joghur/graphQL-javascript-react-client)
@@ -17,7 +17,7 @@ Technology used:
 
 ## Installation
 
-  **index.ts:** if you use two different types of databases on different servers, change logic in this line in main function:
+  **index.ts:** if you use the same type of database on different servers, change logic in this line in main function:
 
 	const _type = __prod__ ? 'mysql' : 'postgres';
 
