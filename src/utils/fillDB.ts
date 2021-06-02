@@ -1,16 +1,18 @@
 import { User, Role } from '../entities';
-import { getConnection } from 'typeorm';
-// import { fakeUsers } from './fakeData/fakeUsers';
-// import { fakeRoles } from './fakeData/fakeRoles';
+import { EntityTarget, getConnection } from 'typeorm';
 import { roles } from './data/roles';
-import { users } from './data/users';
+// import { users } from './data/users';
 import faker from 'faker';
 
 const entities = [User, Role];
 faker.seed(123);
 
 export const fillDB = async () => {
+	// uncomment line below if database is to be cleaned before filling
 	// await cleanDB();
+
+	// roles are finite and can be managed by an array
+	await cleanDBTable(Role);
 	await getConnection()
 		.createQueryBuilder()
 		.insert()
@@ -18,12 +20,12 @@ export const fillDB = async () => {
 		.values(roles)
 		.execute();
 
-	await getConnection()
-		.createQueryBuilder()
-		.insert()
-		.into(User)
-		.values(users)
-		.execute();
+	// await getConnection()
+	// 	.createQueryBuilder()
+	// 	.insert()
+	// 	.into(User)
+	// 	.values(users)
+	// 	.execute();
 	// const role1 = new Role();
 	// const role2 = new Role();
 	// const role3 = new Role();
@@ -80,12 +82,18 @@ export async function cleanDB() {
 				.execute();
 		}
 	} catch (error) {
-		throw new Error(`ERROR: Cleaning test db: ${error}`);
+		throw new Error(`ERROR: Cleaning db: ${error}`);
 	}
 }
 
-// const fakeObjectArray = (fakes) => {
-// 	return fakes.map((fake) => {
-// 		return;
-// 	});
-// };
+export async function cleanDBTable(table: EntityTarget<unknown>) {
+	try {
+		await getConnection()
+			.createQueryBuilder()
+			.delete()
+			.from(table)
+			.execute();
+	} catch (error) {
+		throw new Error(`ERROR: Cleaning db: ${error}`);
+	}
+}

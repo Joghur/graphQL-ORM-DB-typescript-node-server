@@ -8,9 +8,7 @@ import {
 	BaseEntity,
 	JoinTable,
 	ManyToMany,
-	BeforeInsert,
 } from 'typeorm';
-import bcrypt from 'bcrypt';
 import { Role } from '../entities';
 
 @ObjectType()
@@ -97,10 +95,4 @@ export class User extends BaseEntity {
 	@Field(() => String)
 	@UpdateDateColumn()
 	updatedAt: Date;
-
-	@BeforeInsert()
-	async setPassword(password: string) {
-		const salt = await bcrypt.genSalt();
-		this.password = await bcrypt.hash(password || this.password, salt);
-	}
 }

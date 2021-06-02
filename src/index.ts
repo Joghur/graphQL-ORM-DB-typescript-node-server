@@ -10,19 +10,19 @@ import { createConnection } from 'typeorm';
 import path from 'path';
 import { User, Role } from './entities';
 import { UserResolver, RoleResolver } from './resolvers';
-// import { corsOptions } from './config/corsConfig';
 import { corsOptionsDelegate } from './config/corsConfig';
 // import helmet from 'helmet';
-// import { fillDB } from './utils/fillDB';
-// import { cleanDB } from './utils/fillDB';
+import { fillDB } from './utils/fillDB';
+import { cleanDB } from './utils/fillDB';
 
 const main = async () => {
+	// set environment variable NODE_ENV to production on production server.
+	// otherwise Dev database is used
+	// and in this case mysql on production and postgreSQL on development server
 	const _type = __prod__ ? 'mysql' : 'postgres';
 	const _url = __prod__
 		? process.env.DATABASE_URL_PRODUCTION
 		: process.env.DATABASE_URL_DEVELOPMENT;
-
-	console.log('_type', _type);
 
 	const conn = await createConnection({
 		type: _type,
@@ -33,17 +33,20 @@ const main = async () => {
 		entities: [User, Role],
 	});
 
-	// await cleanDB();
+	// if emptying DB is needed uncomment below line
+	await cleanDB();
+
 	await conn.runMigrations();
 
-	// filling db with fakedate
-	// fillDB();
+	// filling db with fake data then uncomment below line
+	fillDB();
 
 	const app = express();
 
 	// app.use(helmet());
 	app.use(cors(corsOptionsDelegate));
 
+	// initializing apollo server. Add objects beside reg & res to be able to access them in resolvers - @Ctx
 	const apolloServer = new ApolloServer({
 		schema: await buildSchema({
 			resolvers: [UserResolver, RoleResolver],
