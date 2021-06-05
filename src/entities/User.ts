@@ -46,47 +46,10 @@ export class User extends BaseEntity {
 	@Column()
 	phone: string;
 
-	@Field(() => String, { nullable: true })
-	@Column()
-	mobile: string;
-
-	@Field(() => String, { nullable: true })
-	@Column()
-	work: string;
-
-	@Field(() => String, { nullable: true })
-	@Column()
-	workemail: string;
-
-	@Field(() => String, { nullable: true })
-	@Column()
-	workphone: string;
-
-	@Field(() => String, { nullable: true })
-	@Column()
-	size: string;
-
-	@Field(() => String, { nullable: true })
-	@Column({
-		type: 'text',
-		nullable: true,
-	})
-	firebaseemail: string;
-
-	@Field(() => String, { nullable: true })
-	@Column({
-		type: 'text',
-		nullable: true,
-	})
-	firebaseuid: string;
-
 	@Field(() => [Role], { nullable: true })
 	@ManyToMany(() => Role, (role) => role.users)
 	@JoinTable()
 	roles: Role[];
-
-	@Column({ type: 'varchar', length: 100, nullable: false })
-	password!: string;
 
 	@Field(() => String)
 	@CreateDateColumn()

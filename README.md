@@ -43,12 +43,19 @@ Technology used:
 ## Start server
 Either:
 
+ - in src/index.ts set **synchronize** to true, if you want your database to change during dev time
+ - and uncomment cleanDB() and/or fillDB() if you want a fresh/filled database
  - Dev -> **yarn watch** and **yarn dev**
+ - or Dev -> **yarn start2**
 
   or
 
+ - remember to set **synchronize** to false in src/index.ts, if you want your database to persist
  - Production -> **yarn build** and then **yarn start**
 
+If everything went well see [http://localhost:4000/graphql](http://localhost:4000/graphql)
+
+---
+
 TODO:
- - createUser doesn't include Roles when creating new user.
- - Error catching when Creating and updating user.
+ - <s>createUser doesn't include Roles when creating new user</s>.

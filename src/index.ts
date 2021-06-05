@@ -8,12 +8,11 @@ import { buildSchema } from 'type-graphql';
 import cors from 'cors';
 import { createConnection } from 'typeorm';
 import path from 'path';
-import { User, Role } from './entities';
+import { entities } from './entities';
 import { UserResolver, RoleResolver } from './resolvers';
 import { corsOptionsDelegate } from './config/corsConfig';
-// import helmet from 'helmet';
-import { fillDB } from './utils/fillDB';
-import { cleanDB } from './utils/fillDB';
+import { fillDB } from '../utils/fillDB';
+import { cleanDB } from '../utils/fillDB';
 
 const main = async () => {
 	// set environment variable NODE_ENV to production on production server.
@@ -28,9 +27,9 @@ const main = async () => {
 		type: _type,
 		url: _url,
 		logging: !__prod__,
-		synchronize: true, // not using __prod__ here. Change to false when not developing.
+		synchronize: true, // not using __prod__ here. Change to false when on production.
 		migrations: [path.join(__dirname, './src/migrations/*')],
-		entities: [User, Role],
+		entities, // entities is an imported array containing all entities.
 	});
 
 	// if emptying DB is needed uncomment below line
@@ -43,7 +42,6 @@ const main = async () => {
 
 	const app = express();
 
-	// app.use(helmet());
 	app.use(cors(corsOptionsDelegate));
 
 	// initializing apollo server. Add objects beside reg & res to be able to access them in resolvers - @Ctx
