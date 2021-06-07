@@ -22,7 +22,7 @@ export const fillDB = async () => {
 
 	// users are made on the fly
 	const _users: userType[] = createUserArray(15); // making 15 fake users
-	console.log('_user 0', _users[0]);
+
 	await cleanDBTable(User);
 	await getConnection()
 		.createQueryBuilder()

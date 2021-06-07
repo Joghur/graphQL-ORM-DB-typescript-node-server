@@ -57,11 +57,11 @@ const main = async () => {
 		playground: true,
 		introspection: true,
 	});
-
+	console.log('ENDPOINT', ENDPOINT);
 	apolloServer.applyMiddleware({
 		app,
 		cors: false,
-		path: ENDPOINT,
+		path: `/${ENDPOINT}`,
 	});
 
 	app.listen(PORT),
