@@ -1,18 +1,16 @@
 import 'reflect-metadata';
 import 'dotenv-safe/config';
-import { __prod__, PORT } from './constants';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
-// import session from 'express-session';
 import cors from 'cors';
 import { createConnection } from 'typeorm';
 import path from 'path';
+import { __prod__, PORT, ENDPOINT } from './constants';
 import { entities } from './entities';
 import { UserResolver, RoleResolver } from './resolvers';
 import { corsOptionsDelegate } from './config/corsConfig';
-import { fillDB } from '../utils/fillDB';
-import { cleanDB } from '../utils/fillDB';
+import { fillDB, cleanDB } from '../utils/fillDB';
 
 const main = async () => {
 	// set environment variable NODE_ENV to production on production server.
@@ -20,8 +18,8 @@ const main = async () => {
 	// and in this case mysql on production and postgreSQL on development server
 	const _type = __prod__ ? 'mysql' : 'postgres';
 	const _url = __prod__
-		? process.env.DATABASE_URL_PRODUCTION
-		: process.env.DATABASE_URL_DEVELOPMENT;
+		? process.env.GENERIC_GRAPHQL_DATABASE_URL_PRODUCTION
+		: process.env.GENERIC_GRAPHQL_DATABASE_URL_DEVELOPMENT;
 
 	const conn = await createConnection({
 		type: _type,
@@ -56,16 +54,19 @@ const main = async () => {
 				res,
 			};
 		},
+		playground: true,
+		introspection: true,
 	});
 
 	apolloServer.applyMiddleware({
 		app,
 		cors: false,
+		path: ENDPOINT,
 	});
 
 	app.listen(PORT),
 		() => {
-			console.log(`server started on localhost:${PORT}`);
+			console.log(`server started on localhost:${PORT}/${ENDPOINT}`);
 		};
 };
 

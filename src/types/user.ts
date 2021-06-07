@@ -1,5 +1,3 @@
-import { roleType } from '.';
-
 export interface userType {
 	active: boolean;
 	name: string;

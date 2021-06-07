@@ -10,7 +10,7 @@
 		"dev2": "nodemon dist/index.js",
 		"start": "node dist/index.js",
 		"start2": "ts-node src/index.ts",
-		"gen": "npx typeorm migration:create -n role",
+		"gen": "npx typeorm migration:create -n role"
 	},
 	"keywords": [],
 	"author": "",

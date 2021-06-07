@@ -7,7 +7,7 @@ module.exports = {
 		'plugin:import/typescript',
 		'plugin:react/recommended',
 		'plugin:jsdoc/recommended',
-		'plugin:prettier/recommended', // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+		'plugin:prettier/recommended', // Make sure this is always the last configuration in the extends array.
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -71,6 +71,14 @@ module.exports = {
 		'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
 		strict: 'off',
 		'lines-around-directive': 'off',
+		'lines-between-class-members': ['off'],
+		'no-sequences': ['off'],
+		'no-unused-expressions': ['off'],
+		'no-plusplus': ['off'],
+		'no-useless-return': ['off'],
+		'@typescript-eslint/explicit-module-boundary-types': ['off'],
+		'jsdoc/require-jsdoc': ['off'],
+		'no-empty-pattern': ['off'],
 	},
 	globals: {
 		fetch: false,

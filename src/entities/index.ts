@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { User } from './User';
 import { Role } from './Role';
 

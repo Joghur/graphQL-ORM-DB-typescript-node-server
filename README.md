@@ -23,8 +23,8 @@ Technology used:
 
   **.env:** - in this case two different types of databases
 
-	DATABASE_URL_DEVELOPMENT=postgresql://postgres:postgres@localhost:5432/<db_development>
-	DATABASE_URL_PRODUCTION=mysql://<user>:<password>@localhost:3306/<db_production>
+	GENERIC_GRAPHQL_DATABASE_URL_DEVELOPMENT=postgresql://postgres:postgres@localhost:5432/<db_development>
+	GENERIC_GRAPHQL_DATABASE_URL_PRODUCTION=mysql://<user>:<password>@localhost:3306/<db_production>
 	CORS_ORIGIN=https://www.example.com
 
 **/src/config/devPages.js:**
@@ -53,7 +53,9 @@ Either:
  - remember to set **synchronize** to false in src/index.ts, if you want your database to persist
  - Production -> **yarn build** and then **yarn start**
 
-If everything went well see [http://localhost:4000/graphql](http://localhost:4000/graphql)
+If everything went well see [http://localhost:4002/genericgraphql](http://localhost:4002/genericgraphql)
+
+**Port** and **endpoint** can be changed in "src/constants.ts"
 
 ---
 

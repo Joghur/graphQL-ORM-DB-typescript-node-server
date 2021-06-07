@@ -1,8 +1,11 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable import/no-unresolved */
 import { EntityTarget, getConnection } from 'typeorm';
+import { userType } from 'src/types';
 import { User, Role, entities } from '../src/entities';
 import { roles } from './data/roles';
 import { createUserArray } from './createUserArray';
-import { userType } from 'src/types';
 
 export const fillDB = async () => {
 	// uncomment line below if database is to be cleaned before filling
